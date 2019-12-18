@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.template', ['activePage' => 'form', 'titlePage' => 'Match Management'])
 @section('content')
 <!-- ============================================================== -->
 <!-- Start Page Content -->

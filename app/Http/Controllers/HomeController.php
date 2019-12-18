@@ -28,13 +28,11 @@ class HomeController extends Controller
 
     public function test()
     {
-        $activePage = 'dashboard';
-        return view('app.test', compact('activePage'));
+        return view('app.test');
     }
 
     public function form()
     {
-        $activePage = 'form';
-        return view('app.form', compact('activePage'));
+        return view('app.form');
     }
 }
