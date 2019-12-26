@@ -26,9 +26,9 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function test()
+    public function dashboard()
     {
-        return view('app.test');
+        return view('app.dashboard');
     }
 
     public function form()

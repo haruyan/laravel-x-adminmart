@@ -14,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('app.user.index');
+        $users = User::all();
+        return view('app.user.index', compact('users'));
     }
 
     /**
@@ -35,7 +36,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:8',
+            'username' => 'required|min:5|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:5|confirmed',
+        ]);
+
+        return User::create([
+            'name' => $request['name'],
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+        ]);
     }
 
     /**
@@ -69,7 +82,21 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:8',
+            'username' => 'required|min:5|unique:users,username,'.$user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'password' => 'sometimes|min:5|confirmed',
+        ]);
+
+        $user->update([
+            'name' => $request['name'],
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+        ]);
+
+        return $user;
     }
 
     /**
@@ -80,6 +107,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return 'success';
     }
 }

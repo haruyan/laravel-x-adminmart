@@ -9,8 +9,25 @@ require('./bootstrap');
 window.Vue = require('vue');
 Vue.config.productionTip = false;
 
+import { Form, HasError, AlertError } from 'vform'
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 import swal from 'sweetalert2';
 window.swal = swal;
+const Toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', swal.stopTimer)
+      toast.addEventListener('mouseleave', swal.resumeTimer)
+    }
+})
+window.toast = Toast;
 
 /**
  * The following block of code may be used to automatically register your

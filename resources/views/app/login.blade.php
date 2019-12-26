@@ -5,14 +5,14 @@
         <img src="{{ asset('template/assets/images/big/icon.png') }}" alt="wrapkit">
     </div>
     <h2 class="mt-3 text-center">Sign In</h2>
-    <p class="text-center">Enter your email address and password to access admin panel.</p>
+    <p class="text-center">Enter your email or username and password to access admin panel.</p>
     <form class="mt-4" method="POST" action="{{ route('login') }}">
         @csrf
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
-                    <label class="text-dark" for="uname">Username</label>
-                    <input id="uname" type="text" placeholder="enter your username"
+                    <label class="text-dark" for="uname">Username or Email</label>
+                    <input id="uname" type="text" placeholder="enter your username/email"
                         class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}"
                         name="username" required autocomplete="username" autofocus>
 
